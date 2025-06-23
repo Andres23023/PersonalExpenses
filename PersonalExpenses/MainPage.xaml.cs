@@ -10,7 +10,7 @@ namespace PersonalExpenses
             InitializeComponent();
             this.BindingContext = this;
         }
-
+        
         public List<RBTN_Categorias> Items => new List<RBTN_Categorias> 
         {
             new RBTN_Categorias{Id=1, Categoria = "Inversiones"},

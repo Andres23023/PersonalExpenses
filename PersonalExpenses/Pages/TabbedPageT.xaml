@@ -4,10 +4,24 @@
              xmlns:local="clr-namespace:PersonalExpenses.Pages"
              xmlns:local1="clr-namespace:PersonalExpenses"
              x:Class="PersonalExpenses.Pages.TabbedPageT"
-            
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             android:TabbedPage.ToolbarPlacement="Bottom"
              Title="TabbedPageT">
-    <local1:MainPage/>
-    <local:AdministrarCategorias/>
+    
+    <NavigationPage Title="Inicio"
+                    IconImageSource="home.png">
+        <x:Arguments>
+            <local1:MainPage/>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="Categorias"
+                    IconImageSource="categoria.png">
+        <x:Arguments >
+            <local:AdministrarCategorias/>
+        </x:Arguments>
+    </NavigationPage>
+
     
 
 </TabbedPage>
