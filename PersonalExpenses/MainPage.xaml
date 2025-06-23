@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalExpenses.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="banner.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                Text="Control de gastos"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Agregue un gasto por favor"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+            <Entry 
+                x:Name="txtNombreGasto"
+                Placeholder="Gasto"/>
+            <Entry 
+                x:Name="txtCantidadGasto"
+                Placeholder="Cantidad"
+                Keyboard="Numeric"/>
+            <Label
+                Text="Seleccione una Categoria:"/>
+            <HorizontalStackLayout
+                x:Name="SecctionList"
+                BindableLayout.ItemsSource="{Binding Items}"
+                Spacing="10">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            Content="{Binding Categoria}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </HorizontalStackLayout>
+            
+
+            <Button
+                x:Name="btnAddExpense"
+                Text="Añadir Gasto" 
+                SemanticProperties.Hint="Añade algun gasto"
+                Clicked="AddExpense"
+                HorizontalOptions="Fill" />
+            <Label
+                x:Name="lblPrueba"
+                Text=""
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level4" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
