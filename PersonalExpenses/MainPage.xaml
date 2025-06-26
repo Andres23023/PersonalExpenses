@@ -35,7 +35,7 @@
                 Keyboard="Numeric"/>
             <Label
                 Text="Seleccione una Categoria:"/>
-            <VerticalStackLayout
+            <StackLayout
                 x:Name="SecctionList"
                 BindableLayout.ItemsSource="{Binding RbtnCategorias}"
                 Spacing="10">
@@ -46,7 +46,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
 
-            </VerticalStackLayout>
+            </StackLayout>
 
 
             <Button
