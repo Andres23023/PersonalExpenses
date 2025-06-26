@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PersonalExpenses.MainPage"
+             xmlns:viewmodel="clr-namespace:PersonalExpenses.Pages"
+             x:DataType="viewmodel:MainViewModel"
              Title="Inicio">
 
     <ScrollView>
@@ -33,25 +35,24 @@
                 Keyboard="Numeric"/>
             <Label
                 Text="Seleccione una Categoria:"/>
-            <HorizontalStackLayout
+            <VerticalStackLayout
                 x:Name="SecctionList"
-                BindableLayout.ItemsSource="{Binding Items}"
+                BindableLayout.ItemsSource="{Binding RbtnCategorias}"
                 Spacing="10">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton
-                            Content="{Binding Categoria}"/>
+                        <RadioButton GroupName="CategoriasGroup"
+                                     Content="{Binding Categoria}"/>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
 
-            </HorizontalStackLayout>
-            
+            </VerticalStackLayout>
+
 
             <Button
                 x:Name="btnAddExpense"
                 Text="Añadir Gasto" 
-                SemanticProperties.Hint="Añade algun gasto"
-                Clicked="AddExpense"
+                Command="{Binding AddExpenseCommand}"
                 HorizontalOptions="Fill" />
             <Label
                 x:Name="lblPrueba"

@@ -1,17 +1,15 @@
-﻿using PersonalExpenses.Pages;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalExpenses.Pages;
 namespace PersonalExpenses
 {
     public partial class App : Application
     {
-        public App()
+        
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            MainPage = new TabbedPageT();
-        }
+            MainPage = serviceProvider.GetService<TabbedPageT>();
 
-        //protected override Window CreateWindow(IActivationState? activationState)
-        //{
-        //    return new Window(new AppShell());
-        //}
+        }
     }
 }

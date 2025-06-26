@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PersonalExpenses.Pages;
 
 namespace PersonalExpenses
 {
@@ -14,6 +15,13 @@ namespace PersonalExpenses
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<TabbedPageT>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<Gastos>();
+            builder.Services.AddSingleton<AdministrarCategorias>();
 
 
 

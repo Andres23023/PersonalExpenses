@@ -8,5 +8,20 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Grid RowDefinitions="100,Auto"
+              ColumnDefinitions="0.5,0.5">
+            <SwipeItemView>
+                <Grid>
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer/>
+
+                        </Frame.GestureRecognizers>
+                        <Label Text="Ejemplo"/>
+                    </Frame>
+                </Grid>
+                
+            </SwipeItemView>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

@@ -8,20 +8,5 @@
              android:TabbedPage.ToolbarPlacement="Bottom"
              Title="TabbedPageT">
     
-    <NavigationPage Title="Inicio"
-                    IconImageSource="home.png">
-        <x:Arguments>
-            <local1:MainPage/>
-        </x:Arguments>
-    </NavigationPage>
-
-    <NavigationPage Title="Categorias"
-                    IconImageSource="categoria.png">
-        <x:Arguments >
-            <local:AdministrarCategorias/>
-        </x:Arguments>
-    </NavigationPage>
-
-    
 
 </TabbedPage>
