@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalExpenses.Pages.GastoPage"
+             xmlns:viewmodel="clr-namespace:PersonalExpenses.Pages"
+             x:DataType="viewmodel:GastoViewModel"
+             Title="Gastos">
+    <VerticalStackLayout>
+        
+        <Grid RowDefinitions="Auto,Auto"
+          ColumnDefinitions=".50*,.25*,.25*"
+          Padding="10"
+          RowSpacing="10"
+          ColumnSpacing="10">
+            <Label Text="Gasto" FontSize="20" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="Categoria" FontSize="20" Grid.Column="1" Grid.Row="0"/>
+            <Label Text="Cantidad" FontSize="20" Grid.Column="2" Grid.Row="0"/>
+            <!--  aqui van los Gastos-->
+            <CollectionView Grid.Column="0" Grid.Row="1"
+                            ItemsSource="{Binding Gastos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <Border>
+                            <Label 
+                                FontSize="20"
+                                Text="{Binding NomGasto}"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--  aqui van los Cantidad-->
+            <CollectionView Grid.Column="1" Grid.Row="1"
+                ItemsSource="{Binding Gastos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:Int32}">
+                        <Border>
+                            <Label 
+                                FontSize="20"
+                                Text="{Binding Categoria}"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--  aqui van los Categorias-->
+            <CollectionView Grid.Column="2" Grid.Row="1"
+                ItemsSource="{Binding Gastos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <Border>
+                            <Label 
+                                FontSize="20"
+                                Text="{Binding Cantidad}"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+        <Label 
+            Text="{Binding Suma}"
+            FontSize="30"
+            HorizontalOptions="Center"/>
+        
+
+    </VerticalStackLayout>
+
+</ContentPage>

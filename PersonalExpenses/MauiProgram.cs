@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PersonalExpenses.Models;
 using PersonalExpenses.Pages;
 
 namespace PersonalExpenses
@@ -17,11 +18,23 @@ namespace PersonalExpenses
                 });
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            //TabbedPage
             builder.Services.AddSingleton<TabbedPageT>();
-            builder.Services.AddSingleton<MainViewModel>();
+            //Paginas
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<Gastos>();
+            builder.Services.AddSingleton<GastoPage>();
             builder.Services.AddSingleton<AdministrarCategorias>();
+
+            //ViewModels
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<GastoViewModel>();
+
+            //Services
+            builder.Services.AddSingleton<GastoService>();
+
+            //Models
+            builder.Services.AddTransient<GastoModel>();
+
 
 
 

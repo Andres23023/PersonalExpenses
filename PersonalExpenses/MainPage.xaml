@@ -28,23 +28,20 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
             <Entry 
                 x:Name="txtNombreGasto"
+                Text="{Binding TxtGasto}"
                 Placeholder="Gasto"/>
             <Entry 
                 x:Name="txtCantidadGasto"
+                Text="{Binding TxtCantidad}"
                 Placeholder="Cantidad"
                 Keyboard="Numeric"/>
-            <Label
-                Text="Seleccione una Categoria:"/>
             <StackLayout
                 x:Name="SecctionList"
-                BindableLayout.ItemsSource="{Binding RbtnCategorias}"
                 Spacing="10">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <RadioButton GroupName="CategoriasGroup"
-                                     Content="{Binding Categoria}"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+                <Picker Title="Selecciona una categoria"
+                     ItemsSource="{Binding PickerCategorias}"
+                     ItemDisplayBinding="{Binding Categoria}"
+                     SelectedItem="{Binding ItemCategoria}"/>
 
             </StackLayout>
 
@@ -56,7 +53,7 @@
                 HorizontalOptions="Fill" />
             <Label
                 x:Name="lblPrueba"
-                Text=""
+                Text="{Binding LblPrueba}"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level4" />
 

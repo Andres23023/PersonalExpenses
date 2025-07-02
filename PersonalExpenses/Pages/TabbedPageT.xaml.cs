@@ -13,7 +13,7 @@ public partial class TabbedPageT : TabbedPage
             Title = "Inicio",
             IconImageSource = "home.png"
         };
-        var gastos = new NavigationPage(serviceProvider.GetService<Gastos>())
+        var gastos = new NavigationPage(serviceProvider.GetService<GastoPage>())
         {
             Title = "Gastos",
             IconImageSource = "gastos.png"

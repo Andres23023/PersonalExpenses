@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+//using ObjCBindings;
+using PersonalExpenses.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,49 +16,61 @@ namespace PersonalExpenses.Pages
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<RBTN_Categorias> rbtnCategorias;
+        private ObservableCollection<Picker_Categorias> pickerCategorias;
+        private readonly GastoService gastoService;
         IConnectivity connectivity;
-        public MainViewModel(IConnectivity connectivity)
+        public MainViewModel(IConnectivity connectivity, GastoService gastoService)
         {
-            Items = new ObservableCollection<String>();
             this.connectivity = connectivity;
-            RbtnCategorias = new ObservableCollection<RBTN_Categorias>
+            PickerCategorias = new ObservableCollection<Picker_Categorias>
             {
-                new RBTN_Categorias { Id = 1, Categoria = "Inversiones" },
-                new RBTN_Categorias { Id = 2, Categoria = "Gastos" }
+                new Picker_Categorias {Categoria = "Inversiones" },
+                new Picker_Categorias {Categoria = "Gastos" }
             };
+            this.gastoService = gastoService;
+
             //LoadItems();
         }
-        [ObservableProperty]
-        ObservableCollection<string> items;
 
         [ObservableProperty]
-        string text;
+        string txtGasto;
+        [ObservableProperty]
+        int txtCantidad;
+        [ObservableProperty]
+        Picker_Categorias itemCategoria;
+
+
+        [ObservableProperty]
+        string lblPrueba;
 
         [RelayCommand]
-        async Task AddExpense()
+        void AddExpense()
         {
-            if (string.IsNullOrWhiteSpace(Text))
-                return;
-            if (connectivity.NetworkAccess != NetworkAccess.Internet)
+            var nuevoGasto = new GastoModel
             {
-                await Shell.Current.DisplayAlert("Uh Oh!", "No hay acceso a internet", "Ok");
-                return;
-            }
+                NomGasto = TxtGasto,
+                Cantidad = TxtCantidad,
+                Categoria = ItemCategoria?.Categoria
+             };
 
-            Items.Add(Text);
-            //SaveItems();
-            Text = string.Empty;
+
+            gastoService.Gastos.Add(nuevoGasto);
+            nuevoGasto.GastoSuma();
+            LblPrueba = TxtGasto;
+
+            TxtGasto = string.Empty;
+            TxtCantidad = 0;
+            ItemCategoria = new Picker_Categorias();
         }
-        [RelayCommand]
-        void Delete(string s)
-        {
-            if (Items.Contains(s))
-            {
-                Items.Remove(s);
-                //SaveItems();
-            }
-        }
+        //[RelayCommand]
+        //void Delete(string s)
+        //{
+        //    if (Gastos.Contains(s))
+        //    {
+        //        Gastos.Remove(s);
+        //        //SaveItems();
+        //    }
+        //}
         //[RelayCommand]
         //async Task Tap(string s)
         //{
