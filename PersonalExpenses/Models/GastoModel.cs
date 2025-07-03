@@ -11,11 +11,5 @@ namespace PersonalExpenses.Models
         public string NomGasto { get; set; }
         public int Cantidad { get; set; }
         public string Categoria { get; set; }
-        public static int suma { get; set; } = 0;
-        public int GastoSuma()
-        {
-            suma += this.Cantidad;
-            return suma;
-        }
     }
 }

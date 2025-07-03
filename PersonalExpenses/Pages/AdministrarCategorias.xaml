@@ -3,25 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PersonalExpenses.Pages.AdministrarCategorias"
              Title="Categorias">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Grid RowDefinitions="100,Auto"
-              ColumnDefinitions="0.5,0.5">
-            <SwipeItemView>
-                <Grid>
-                    <Frame>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer/>
 
-                        </Frame.GestureRecognizers>
-                        <Label Text="Ejemplo"/>
-                    </Frame>
-                </Grid>
-                
-            </SwipeItemView>
-        </Grid>
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <CollectionView Grid.Column="0" Grid.Row="0"
+            ItemsSource="{Binding Categorias}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <SwipeView>
+
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Eliminar"
+                                           BackgroundColor="Red"
+                                           Command="{Binding algo}"
+                                           CommandParameter="{Binding .}"/>
+
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border StrokeShape="RoundRectangle 20,20,20,20">
+
+                            <Label Margin="20,10,20,10"
+                                           Text="{Binding Categoria}"/>
+                        </Border>
+                            
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+        <Button Text="Prueba"
+                WidthRequest="100"
+                HeightRequest="100"
+                CornerRadius="100"
+                VerticalOptions="End"
+                HorizontalOptions="Center"/>
+
+    </Grid>
+    
 </ContentPage>

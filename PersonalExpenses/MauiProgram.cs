@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using PersonalExpenses.Models;
 using PersonalExpenses.Pages;
+using PersonalExpenses.Services;
+using PersonalExpenses.ViewModels;
 
 namespace PersonalExpenses
 {
@@ -28,12 +30,14 @@ namespace PersonalExpenses
             //ViewModels
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<GastoViewModel>();
+            builder.Services.AddSingleton<AdministrarCategoriasViewModel>();
 
             //Services
             builder.Services.AddSingleton<GastoService>();
+            builder.Services.AddSingleton<CategoriaService>();
 
             //Models
-            builder.Services.AddTransient<GastoModel>();
+            //builder.Services.AddTransient<GastoModel>();
 
 
 

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 //using ObjCBindings;
 using PersonalExpenses.Models;
+using PersonalExpenses.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,18 +17,24 @@ namespace PersonalExpenses.Pages
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Picker_Categorias> pickerCategorias;
+        public ObservableCollection<Picker_Categorias> pickerCategorias;
         private readonly GastoService gastoService;
+        private readonly CategoriaService categoriaService;
         IConnectivity connectivity;
-        public MainViewModel(IConnectivity connectivity, GastoService gastoService)
+
+        //Constructor
+        public MainViewModel(IConnectivity connectivity, GastoService gastoService,CategoriaService categoriaService)
         {
             this.connectivity = connectivity;
-            PickerCategorias = new ObservableCollection<Picker_Categorias>
-            {
-                new Picker_Categorias {Categoria = "Inversiones" },
-                new Picker_Categorias {Categoria = "Gastos" }
-            };
+            //PickerCategorias = new ObservableCollection<Picker_Categorias>
+            //{
+            //    new Picker_Categorias {Categoria = "Inversiones" },
+            //    new Picker_Categorias {Categoria = "Gastos" }
+            //};
+
             this.gastoService = gastoService;
+            this.categoriaService = categoriaService;
+            PickerCategorias = categoriaService.Categorias;
 
             //LoadItems();
         }
@@ -38,6 +45,8 @@ namespace PersonalExpenses.Pages
         int txtCantidad;
         [ObservableProperty]
         Picker_Categorias itemCategoria;
+        //[ObservableProperty]
+        //CategoriaService itemCategoria;
 
 
         [ObservableProperty]
@@ -55,9 +64,9 @@ namespace PersonalExpenses.Pages
 
 
             gastoService.Gastos.Add(nuevoGasto);
-            nuevoGasto.GastoSuma();
-            LblPrueba = TxtGasto;
 
+            LblPrueba = TxtGasto;
+            //Ponerlos vacios una vez agregados
             TxtGasto = string.Empty;
             TxtCantidad = 0;
             ItemCategoria = new Picker_Categorias();
