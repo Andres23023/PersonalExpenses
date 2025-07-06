@@ -1,4 +1,5 @@
-﻿using PersonalExpenses.Pages;
+﻿using PersonalExpenses.Models;
+using PersonalExpenses.Pages;
 using System.Collections.ObjectModel;
 
 namespace PersonalExpenses.Services
@@ -11,6 +12,23 @@ namespace PersonalExpenses.Services
             new Picker_Categorias {Categoria = "Gastos" }
         };
 
-        
+//new Picker_Categorias { Categoria = nombre };
+        public bool AgregarCategoria(string nombre)
+        {
+            if (Categorias.FirstOrDefault(c => c.Categoria == nombre) == null)
+            {
+                Categorias.Add(new Picker_Categorias { Categoria = nombre });
+                return true;
+            }
+            else
+                return false;
+            
+        }
+        public void EliminarCategoria(string nombre)
+        {
+            var eliminar = Categorias.FirstOrDefault( c => c.Categoria == nombre);
+            if (eliminar != null)
+                Categorias.Remove(eliminar);
+        }
     }
 }

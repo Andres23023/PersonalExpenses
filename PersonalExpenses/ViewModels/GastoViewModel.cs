@@ -17,8 +17,6 @@ namespace PersonalExpenses.Pages
         ObservableCollection<GastoModel> gastos;
         [ObservableProperty]
         int suma;
-        //[ObservableProperty]
-        //int cantidad;
         public GastoViewModel(GastoService gastoService)
         {
             this.gastoService = gastoService;

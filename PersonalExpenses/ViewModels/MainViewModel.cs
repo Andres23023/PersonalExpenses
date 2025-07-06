@@ -26,11 +26,6 @@ namespace PersonalExpenses.Pages
         public MainViewModel(IConnectivity connectivity, GastoService gastoService,CategoriaService categoriaService)
         {
             this.connectivity = connectivity;
-            //PickerCategorias = new ObservableCollection<Picker_Categorias>
-            //{
-            //    new Picker_Categorias {Categoria = "Inversiones" },
-            //    new Picker_Categorias {Categoria = "Gastos" }
-            //};
 
             this.gastoService = gastoService;
             this.categoriaService = categoriaService;
@@ -45,8 +40,7 @@ namespace PersonalExpenses.Pages
         int txtCantidad;
         [ObservableProperty]
         Picker_Categorias itemCategoria;
-        //[ObservableProperty]
-        //CategoriaService itemCategoria;
+        
 
 
         [ObservableProperty]

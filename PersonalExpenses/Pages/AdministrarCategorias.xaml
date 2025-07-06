@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PersonalExpenses.ViewModels"
              x:Class="PersonalExpenses.Pages.AdministrarCategorias"
              Title="Categorias">
 
@@ -21,8 +22,11 @@
                             <SwipeItems>
                                 <SwipeItem Text="Eliminar"
                                            BackgroundColor="Red"
-                                           Command="{Binding algo}"
+                                           Clicked="DeleteCategoria"
                                            CommandParameter="{Binding .}"/>
+                                <!--="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"-->
+                                    <!--
+                                           Clicked="DeleteCategoria"-->
 
                             </SwipeItems>
                         </SwipeView.RightItems>
@@ -41,12 +45,15 @@
 
 
 
-        <Button Text="Prueba"
-                WidthRequest="100"
-                HeightRequest="100"
+        <Button ImageSource="agregar.png"
+                WidthRequest="80"
+                HeightRequest="50"
                 CornerRadius="100"
                 VerticalOptions="End"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Clicked="AddCategoria"/>
+                <!---Command="{Binding AddCategoriaCommand}"-->
+        
 
     </Grid>
     
