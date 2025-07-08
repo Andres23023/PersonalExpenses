@@ -21,21 +21,38 @@
                             ItemsSource="{Binding Gastos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type x:String}">
-                        <Border>
-                            <Grid
-                                ColumnDefinitions=".42*,.35*,.23*"
-                                  Padding="10">
-                                <Label Grid.Column="0"
-                                       FontSize="18"
-                                       Text="{Binding NomGasto}"/>
-                                <Label Grid.Column="1"
-                                       FontSize="18"
-                                       Text="{Binding Categoria}"/>
-                                <Label Grid.Column="2"
-                                       FontSize="18"
-                                       Text="{Binding Cantidad}"/>
-                            </Grid>     
-                        </Border>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Eliminar"
+                                               BackgroundColor="Red"
+                                               Clicked="DeleteGasto"
+                                               CommandParameter="{Binding .}"/>
+                                    <!--="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"-->
+                                    <!--
+                   Clicked="DeleteCategoria"-->
+
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Border StrokeShape="RoundRectangle 20"
+                                    Margin="2">
+                                <Grid
+                                    ColumnDefinitions=".42*,.35*,.23*"
+                                      Padding="10">
+                                    <Label Grid.Column="0"
+                                           FontSize="18"
+                                           Text="{Binding NomGasto}"/>
+                                    <Label Grid.Column="1"
+                                           FontSize="18"
+                                           Text="{Binding Categoria}"/>
+                                    <Label Grid.Column="2"
+                                           FontSize="18"
+                                           Text="{Binding Cantidad}"
+                                           HorizontalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

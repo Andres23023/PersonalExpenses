@@ -47,17 +47,17 @@ namespace PersonalExpenses.Pages
         string lblPrueba;
 
         [RelayCommand]
-        void AddExpense()
+        async void AddExpense()
         {
-            var nuevoGasto = new GastoModel
+            if (string.IsNullOrWhiteSpace(TxtGasto) || TxtCantidad <= 0 || ItemCategoria == null)
             {
-                NomGasto = TxtGasto,
-                Cantidad = TxtCantidad,
-                Categoria = ItemCategoria?.Categoria
-             };
+                await App.Current.MainPage.DisplayAlert("Error", "Por favor, completa todos los campos correctamente.", "OK");
+                return;
+            }
 
+            GastoModel gasto = new GastoModel { Cantidad = TxtCantidad, NomGasto = TxtGasto, Categoria = ItemCategoria.Categoria };
+            gastoService.AgregarGasto(gasto);
 
-            gastoService.Gastos.Add(nuevoGasto);
 
             LblPrueba = TxtGasto;
             //Ponerlos vacios una vez agregados

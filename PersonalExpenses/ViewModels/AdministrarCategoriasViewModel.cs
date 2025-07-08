@@ -36,7 +36,7 @@ namespace PersonalExpenses.ViewModels
             else return true;
 
         }
-        public bool EliminarCategoria(string  c)
+        public bool EliminarCategoria(string c)
         {
             if (gastoService.Gastos.Any(g => g.Categoria == c))
             {
@@ -47,6 +47,13 @@ namespace PersonalExpenses.ViewModels
                 categoriaService.EliminarCategoria(c);
                 return true;
             }
+        }
+
+        [RelayCommand]
+        public async void EditarCategoria(Picker_Categorias categoria)
+        {
+            await App.Current?.Windows?.FirstOrDefault()?.Page.DisplayPromptAsync("Editar Categoria", "Ingresa el nuevo nombre de la categoria", "Ok", "Cancelar", "Editar categoria", 20, default, categoria.Categoria);
+            
         }
     }
 }

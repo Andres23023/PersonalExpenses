@@ -23,8 +23,6 @@ namespace PersonalExpenses.Pages
             Gastos = gastoService.Gastos;
         }
 
-
-            
         public void Refresh()
         {
             int nuevaSuma = 0;
@@ -35,7 +33,16 @@ namespace PersonalExpenses.Pages
             Suma = nuevaSuma;
         }
 
-
+        public async void EliminarGasto(GastoModel gasto)
+        {
+            if(gasto == null || !Gastos.Contains(gasto))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "El gasto no existe o ya ha sido eliminado.", "OK");
+                return;
+            }
+            gastoService.EliminarGasto(gasto);
+            Refresh();
+        }
 
     }
 }
