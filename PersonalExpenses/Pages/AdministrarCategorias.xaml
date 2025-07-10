@@ -22,7 +22,7 @@
                             <SwipeItems>
                                 <SwipeItem Text="Eliminar"
                                            BackgroundColor="Red"
-                                           Clicked="DeleteCategoria"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"
                                            CommandParameter="{Binding .}"/>
                                 <!--="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"-->
                                     <!--
@@ -56,7 +56,7 @@
                 CornerRadius="100"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
-                Clicked="AddCategoria"/>
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=AgregarCategoriaCommand}"/>
                 <!---Command="{Binding AddCategoriaCommand}"-->
         
 

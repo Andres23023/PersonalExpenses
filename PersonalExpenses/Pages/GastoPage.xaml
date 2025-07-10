@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PersonalExpenses.Pages.GastoPage"
-             xmlns:viewmodel="clr-namespace:PersonalExpenses.Pages"
-             x:DataType="viewmodel:GastoViewModel"
+             xmlns:vm="clr-namespace:PersonalExpenses.Pages"
+             x:DataType="vm:GastoViewModel"
              Title="Gastos">
     <VerticalStackLayout>
         
@@ -26,7 +26,7 @@
                                 <SwipeItems>
                                     <SwipeItem Text="Eliminar"
                                                BackgroundColor="Red"
-                                               Clicked="DeleteGasto"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GastoViewModel}},Path=EliminarGastoCommand}"
                                                CommandParameter="{Binding .}"/>
                                     <!--="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"-->
                                     <!--
