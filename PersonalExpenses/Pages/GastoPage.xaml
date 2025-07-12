@@ -45,7 +45,7 @@
                                            Text="{Binding NomGasto}"/>
                                     <Label Grid.Column="1"
                                            FontSize="18"
-                                           Text="{Binding Categoria}"/>
+                                           Text="{Binding Categoria.Categoria}"/>
                                     <Label Grid.Column="2"
                                            FontSize="18"
                                            Text="{Binding Cantidad}"

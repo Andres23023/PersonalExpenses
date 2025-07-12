@@ -11,5 +11,11 @@ namespace PersonalExpenses
             InitializeComponent();
             BindingContext = vm;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var vm = BindingContext as MainViewModel;
+            vm.RefreshCategorias();
+        }
     }
 }

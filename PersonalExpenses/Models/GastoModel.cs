@@ -1,11 +1,17 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using PersonalExpenses.Pages;
+
 namespace PersonalExpenses.Models
 {
-    public class GastoModel
+    public partial class GastoModel:ObservableObject
     {
-        
-        public string NomGasto { get; set; }
-        public int Cantidad { get; set; }
-        public string Categoria { get; set; }
+
+        [ObservableProperty]
+        public string nomGasto;
+        [ObservableProperty]
+        public int cantidad;
+        [ObservableProperty]
+        public Picker_Categorias categoria;
     }
 }

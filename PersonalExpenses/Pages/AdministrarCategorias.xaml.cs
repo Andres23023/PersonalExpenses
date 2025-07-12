@@ -69,8 +69,9 @@ public partial class AdministrarCategorias : ContentPage
         vm.OnCategoriaEdit = async (categoria) =>
         {
             string result = await DisplayPromptAsync("Editar Categoria", "Ingresa el nuevo nombre de la categoria", "Ok", "Cancelar", "Editar categoria", 20, default, categoria.Categoria);
-
-            if (string.IsNullOrWhiteSpace(result))
+            if (result == null)
+                return null;
+            else if (result == "")
             {
                 vm.SnackBarInfo?.Invoke("No se puede dejar el nombre en blanco", vm.Error);
                 return null;

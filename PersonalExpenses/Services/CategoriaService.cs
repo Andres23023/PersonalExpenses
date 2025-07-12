@@ -12,8 +12,6 @@ namespace PersonalExpenses.Services
             new Picker_Categorias {Categoria = "Inversiones" },
             new Picker_Categorias {Categoria = "Gastos" }
         };
-
-//new Picker_Categorias { Categoria = nombre };
         public void AgregarCategoria(string nombre)
         {
             if (Categorias.FirstOrDefault(c => c.Categoria == nombre) == null)
@@ -21,16 +19,15 @@ namespace PersonalExpenses.Services
             return;
             
         }
-        public void EliminarCategoria(string nombre)
+        public void EliminarCategoria(Picker_Categorias nombre)
         {
-            var eliminar = Categorias.FirstOrDefault( c => c.Categoria == nombre);
+            var eliminar = Categorias.FirstOrDefault( c => c == nombre);
             if (eliminar != null)
                 Categorias.Remove(eliminar);
             return;
         }
         public void EditarCategoria(Picker_Categorias categoria, string nuevoNombre)
         {
-            var a = Categorias.FirstOrDefault(c => c.Categoria == nuevoNombre);
             if (Categorias.FirstOrDefault(c => c.Categoria == nuevoNombre) == null)
             {
                 var index = Categorias.IndexOf(categoria);

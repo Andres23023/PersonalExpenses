@@ -1,8 +1,11 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace PersonalExpenses.Pages
 {
-    public class Picker_Categorias
+    public partial class Picker_Categorias:ObservableObject
     {
-        public string Categoria { get; set; }
+        [ObservableProperty]
+        public string categoria;
     }
 }

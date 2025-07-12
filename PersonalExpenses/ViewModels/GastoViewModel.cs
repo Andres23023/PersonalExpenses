@@ -45,6 +45,7 @@ namespace PersonalExpenses.Pages
             {
                 gastoService.EliminarGasto(gasto);
                 SnackBarInfo?.Invoke($"Gasto {gasto.NomGasto} eliminado correctamente!", Success);
+                Refresh();
             }
             return;
         }

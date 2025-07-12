@@ -61,7 +61,7 @@ namespace PersonalExpenses.ViewModels
         [RelayCommand]
         public async Task EliminarCategoria(Picker_Categorias c)
         {
-            if (gastoService.Gastos.Any(g => g.Categoria == c.Categoria))
+            if (gastoService.Gastos.Any(g => g.categoria == c))
             {
                 SnackBarInfo?.Invoke("No se puede eliminar la categoria porque tiene gastos asociados.", Error);
                 return;
@@ -71,7 +71,7 @@ namespace PersonalExpenses.ViewModels
                 bool result = await OnCategoriaDelete?.Invoke(c);
                 if (result)
                 {
-                    categoriaService.EliminarCategoria(c.Categoria);
+                    categoriaService.EliminarCategoria(c);
                     SnackBarInfo?.Invoke($"Categoria {c.Categoria} eliminada correctamente", Success);
                 }
             }
@@ -93,5 +93,6 @@ namespace PersonalExpenses.ViewModels
             }
 
         }
+        
     }
 }

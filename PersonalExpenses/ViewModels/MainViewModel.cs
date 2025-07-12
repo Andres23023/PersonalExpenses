@@ -1,16 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-//using ObjCBindings;
 using PersonalExpenses.Models;
 using PersonalExpenses.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PersonalExpenses.Pages
 {
@@ -33,15 +25,14 @@ namespace PersonalExpenses.Pages
 
             //LoadItems();
         }
-
         [ObservableProperty]
         string txtGasto;
         [ObservableProperty]
         int txtCantidad;
         [ObservableProperty]
         Picker_Categorias itemCategoria;
-        
 
+        
 
         [ObservableProperty]
         string lblPrueba;
@@ -55,15 +46,20 @@ namespace PersonalExpenses.Pages
                 return;
             }
 
-            GastoModel gasto = new GastoModel { Cantidad = TxtCantidad, NomGasto = TxtGasto, Categoria = ItemCategoria.Categoria };
+            GastoModel gasto = new GastoModel { Cantidad = TxtCantidad, NomGasto = TxtGasto, Categoria = ItemCategoria};
             gastoService.AgregarGasto(gasto);
-
+            
 
             LblPrueba = TxtGasto;
             //Ponerlos vacios una vez agregados
             TxtGasto = string.Empty;
             TxtCantidad = 0;
-            ItemCategoria = new Picker_Categorias();
+            ItemCategoria = null;
+            
+        }
+        public void RefreshCategorias()
+        {
+            PickerCategorias = new ObservableCollection<Picker_Categorias>(categoriaService.Categorias);
         }
         //[RelayCommand]
         //void Delete(string s)
@@ -104,13 +100,13 @@ namespace PersonalExpenses.Pages
         //    Preferences.Set("ToDoItems", json);
         //}
 
-        
+
         //public ObservableCollection<RBTN_Categorias> RBTNCategorias  => new ObservableCollection<RBTN_Categorias>
         //{
         //    new RBTN_Categorias{Id=1, Categoria = "Inversiones"},
         //    new RBTN_Categorias{Id=2, Categoria = "Gastos"}
         //};
-        
+
 
     }
 }
