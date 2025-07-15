@@ -5,7 +5,15 @@ namespace PersonalExpenses.Pages
 {
     public partial class Picker_Categorias:ObservableObject
     {
+        protected static int globalId;
         [ObservableProperty]
-        public string categoria;
+        public string categoriaNom;
+        [ObservableProperty]
+        public int idCategoria;
+        public Picker_Categorias(string Categoria)
+        {
+            this.CategoriaNom = Categoria;
+            this.idCategoria = Interlocked.Increment(ref globalId);
+        }
     }
 }

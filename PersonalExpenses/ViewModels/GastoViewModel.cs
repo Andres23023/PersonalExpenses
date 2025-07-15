@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PersonalExpenses.Models;
+using PersonalExpenses.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -10,21 +11,18 @@ namespace PersonalExpenses.Pages
     public partial class GastoViewModel: ObservableObject
     {
         private readonly GastoService gastoService;
-        
+        private readonly NotificacionesService _notificaciones;
 
         [ObservableProperty]
         ObservableCollection<GastoModel> gastos;
         [ObservableProperty]
         int suma;
-        public GastoViewModel(GastoService gastoService)
+        public GastoViewModel(GastoService gastoService,NotificacionesService notificaciones)
         {
             this.gastoService = gastoService;
             Gastos = gastoService.Gastos;
+            _notificaciones = notificaciones;
         }
-        public Action<string, Color> SnackBarInfo;
-        public Color Error = Colors.Red;
-        //public Color Info = Colors.Orange;
-        public Color Success = Colors.Green;
 
 
         public void Refresh()
@@ -36,15 +34,14 @@ namespace PersonalExpenses.Pages
             }
             Suma = nuevaSuma;
         }
-        public Func<GastoModel,Task<bool>> onEliminarGasto;
         [RelayCommand]
         public async Task EliminarGasto(GastoModel gasto)
         {
-            bool response = await onEliminarGasto?.Invoke(gasto);
+            bool response = await _notificaciones.ShowAlert("Eliminar Gasto", $"Desea eliminar el gasto: {gasto.NomGasto}?");
             if (response)
             {
                 gastoService.EliminarGasto(gasto);
-                SnackBarInfo?.Invoke($"Gasto {gasto.NomGasto} eliminado correctamente!", Success);
+                _notificaciones.ShowSnackBar($"Gasto {gasto.NomGasto} eliminado correctamente!", _notificaciones.Success);
                 Refresh();
             }
             return;

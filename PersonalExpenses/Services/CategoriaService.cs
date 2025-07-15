@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PersonalExpenses.Models;
-using PersonalExpenses.Pages;
+﻿using PersonalExpenses.Pages;
 using System.Collections.ObjectModel;
 
 namespace PersonalExpenses.Services
@@ -9,33 +7,20 @@ namespace PersonalExpenses.Services
     {
         public ObservableCollection<Picker_Categorias> Categorias { get; set; } = new ObservableCollection<Picker_Categorias>
         {
-            new Picker_Categorias {Categoria = "Inversiones" },
-            new Picker_Categorias {Categoria = "Gastos" }
+            new Picker_Categorias ("Gastos"),
+            new Picker_Categorias ("Inversiones")
         };
         public void AgregarCategoria(string nombre)
         {
-            if (Categorias.FirstOrDefault(c => c.Categoria == nombre) == null)
-                Categorias.Add(new Picker_Categorias { Categoria = nombre });
-            return;
-            
+            Categorias.Add(new Picker_Categorias(Categoria: nombre));
         }
-        public void EliminarCategoria(Picker_Categorias nombre)
+        public void EliminarCategoria(int id)
         {
-            var eliminar = Categorias.FirstOrDefault( c => c == nombre);
-            if (eliminar != null)
-                Categorias.Remove(eliminar);
-            return;
+            Categorias.Remove(Categorias.FirstOrDefault(c => c.IdCategoria == id));
         }
-        public void EditarCategoria(Picker_Categorias categoria, string nuevoNombre)
+        public void EditarCategoria(int id, string nuevoNombre)
         {
-            if (Categorias.FirstOrDefault(c => c.Categoria == nuevoNombre) == null)
-            {
-                var index = Categorias.IndexOf(categoria);
-                if (index >= 0)
-                    Categorias[index].Categoria = nuevoNombre;
-            }
-            else
-                return;
+            Categorias.FirstOrDefault(c => c.IdCategoria == id).CategoriaNom = nuevoNombre;
         }
     }
 }

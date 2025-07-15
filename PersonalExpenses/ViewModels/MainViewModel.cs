@@ -12,18 +12,18 @@ namespace PersonalExpenses.Pages
         public ObservableCollection<Picker_Categorias> pickerCategorias;
         private readonly GastoService gastoService;
         private readonly CategoriaService categoriaService;
+        private readonly NotificacionesService _notificaciones;
         IConnectivity connectivity;
 
         //Constructor
-        public MainViewModel(IConnectivity connectivity, GastoService gastoService,CategoriaService categoriaService)
+        public MainViewModel(IConnectivity connectivity, GastoService gastoService,CategoriaService categoriaService,NotificacionesService notificaciones)
         {
             this.connectivity = connectivity;
 
             this.gastoService = gastoService;
             this.categoriaService = categoriaService;
             PickerCategorias = categoriaService.Categorias;
-
-            //LoadItems();
+            _notificaciones = notificaciones;
         }
         [ObservableProperty]
         string txtGasto;
@@ -42,7 +42,8 @@ namespace PersonalExpenses.Pages
         {
             if (string.IsNullOrWhiteSpace(TxtGasto) || TxtCantidad <= 0 || ItemCategoria == null)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Por favor, completa todos los campos correctamente.", "OK");
+                bool res = await _notificaciones.ShowAlert("Error", "Por favor, complete todos los campos antes de agregar un gasto.");
+
                 return;
             }
 
@@ -50,12 +51,12 @@ namespace PersonalExpenses.Pages
             gastoService.AgregarGasto(gasto);
             
 
-            LblPrueba = TxtGasto;
+            await _notificaciones.ShowSnackBar($"Gasto {gasto.NomGasto} agregado correctamente", _notificaciones.Success);
             //Ponerlos vacios una vez agregados
             TxtGasto = string.Empty;
             TxtCantidad = 0;
             ItemCategoria = null;
-            
+
         }
         public void RefreshCategorias()
         {

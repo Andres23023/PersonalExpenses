@@ -14,82 +14,87 @@ namespace PersonalExpenses.ViewModels
     {
         private CategoriaService categoriaService;
         private readonly GastoService gastoService;
+        private readonly NotificacionesService _notificaciones;
         [ObservableProperty]
         ObservableCollection<Picker_Categorias> categorias;
 
         //Constructor
-        public AdministrarCategoriasViewModel(CategoriaService categoriaService,GastoService gastoService) 
+        public AdministrarCategoriasViewModel(CategoriaService categoriaService,GastoService gastoService,NotificacionesService notificaciones) 
         {
             this.categoriaService = categoriaService;
             this.gastoService = gastoService;
             Categorias = categoriaService.Categorias;
+            _notificaciones = notificaciones;
         }
-        //public Func<string, Task> MostrarMensajeAlert;
-        public Action<string,Color> SnackBarInfo;
-        public Color Error = Colors.Red;
-        public Color Info = Colors.Orange;
-        public Color Success = Colors.Green;
 
-        public Func<Task<string>> OnCategoriaMade;
         [RelayCommand]
         public async Task AgregarCategoria()
         {
-            string result = await OnCategoriaMade?.Invoke();
+            string result = await _notificaciones.ShowPrompt("Nueva Categoria", "Ingresa el nombre de la nueva categoria", "Nueva categoria", 20, string.Empty);
             if (result == "")
             {
-                SnackBarInfo?.Invoke("No se puede agregar una categoria en blanco", Info);
+                _notificaciones.ShowSnackBar("No se puede agregar una categoria vacia", _notificaciones.Error);
                 return;
             }
             else if (result == null)
                 return;
 
-            if (categoriaService.Categorias.Any(c => c.Categoria == result))
+            if (categoriaService.Categorias.Any(c => c.CategoriaNom == result))
             {
-                SnackBarInfo?.Invoke("No se puede agregar una categoria repetida", Info);
+                _notificaciones.ShowSnackBar("No se puede agregar una categoria repetida", _notificaciones.Info);
                 return;
             }
             else
             {
                 categoriaService.AgregarCategoria(result);
-                SnackBarInfo?.Invoke($"Categoria {result} agregada correctamente", Success);
+                _notificaciones.ShowSnackBar($"Categoria {result} agregada correctamente", _notificaciones.Success);
             }
 
         }
 
-        public Func<Picker_Categorias,Task<bool>> OnCategoriaDelete;
 
         [RelayCommand]
         public async Task EliminarCategoria(Picker_Categorias c)
         {
-            if (gastoService.Gastos.Any(g => g.categoria == c))
+            if (gastoService.Gastos.Any(g => g.Categoria.IdCategoria == c.IdCategoria))
             {
-                SnackBarInfo?.Invoke("No se puede eliminar la categoria porque tiene gastos asociados.", Error);
+                _notificaciones?.ShowSnackBar("No se puede eliminar la categoria porque tiene gastos asociados.", _notificaciones.Error);
                 return;
             }
             else
             {
-                bool result = await OnCategoriaDelete?.Invoke(c);
+                bool result = await _notificaciones.ShowAlert("Eliminar Categoria", $"Desea eliminar la categoria {c.CategoriaNom}?");
                 if (result)
                 {
-                    categoriaService.EliminarCategoria(c);
-                    SnackBarInfo?.Invoke($"Categoria {c.Categoria} eliminada correctamente", Success);
+                    categoriaService.EliminarCategoria(c.IdCategoria);
+                    _notificaciones?.ShowSnackBar($"Categoria {c.CategoriaNom} eliminada correctamente", _notificaciones.Success);
                 }
+                return;
             }
             
         }
 
-        public Func<Picker_Categorias, Task<string>> OnCategoriaEdit;
-
         [RelayCommand]
         public async Task EditarCategoria(Picker_Categorias categoria)
         {
-            string result = await OnCategoriaEdit?.Invoke(categoria);
+            string result = await _notificaciones.ShowPrompt("Editar Categoria", "Ingresa el nuevo nombre de la categoria", "Editar categoria", 20, categoria.CategoriaNom);
+
             if (result == null)
                 return;
+            else if (result == "")
+            {
+                _notificaciones?.ShowSnackBar("No se puede dejar el nombre en blanco", _notificaciones.Error);
+                return;
+            }
+            else if (categoriaService.Categorias.Any(c => c.CategoriaNom == result))
+            {
+                _notificaciones?.ShowSnackBar("No se puede agregar una categoria repetida", _notificaciones.Error);
+                return;
+            }
             else
             {
-                categoriaService.EditarCategoria(categoria, result);
-                SnackBarInfo?.Invoke($"Categoria {categoria.Categoria} editada correctamente", Success);
+                categoriaService.EditarCategoria(categoria.IdCategoria, result);
+                _notificaciones?.ShowSnackBar($"Categoria {categoria.CategoriaNom} editada correctamente", _notificaciones.Success);
             }
 
         }

@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace PersonalExpenses.Pages;
 
 public partial class TabbedPageT : TabbedPage

@@ -35,6 +35,7 @@ namespace PersonalExpenses
             //Services
             builder.Services.AddSingleton<GastoService>();
             builder.Services.AddSingleton<CategoriaService>();
+            builder.Services.AddSingleton<NotificacionesService>();
 
             //Models
             //builder.Services.AddTransient<GastoModel>();

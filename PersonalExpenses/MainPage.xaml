@@ -40,7 +40,7 @@
                 Spacing="10">
                 <Picker Title="Selecciona una categoria"
                      ItemsSource="{Binding PickerCategorias}"
-                     ItemDisplayBinding="{Binding Categoria}"
+                     ItemDisplayBinding="{Binding CategoriaNom}"
                      SelectedItem="{Binding ItemCategoria}"/>
 
             </StackLayout>
@@ -51,11 +51,6 @@
                 Text="Añadir Gasto" 
                 Command="{Binding AddExpenseCommand}"
                 HorizontalOptions="Fill" />
-            <Label
-                x:Name="lblPrueba"
-                Text="{Binding LblPrueba}"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level4" />
 
         </VerticalStackLayout>
     </ScrollView>
