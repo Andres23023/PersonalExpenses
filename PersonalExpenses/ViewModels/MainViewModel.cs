@@ -9,7 +9,7 @@ namespace PersonalExpenses.Pages
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        public ObservableCollection<Picker_Categorias> pickerCategorias;
+        public ObservableCollection<CategoriaModel> pickerCategorias;
         private readonly GastoService gastoService;
         private readonly CategoriaService categoriaService;
         private readonly NotificacionesService _notificaciones;
@@ -30,7 +30,7 @@ namespace PersonalExpenses.Pages
         [ObservableProperty]
         int txtCantidad;
         [ObservableProperty]
-        Picker_Categorias itemCategoria;
+        CategoriaModel itemCategoria;
 
         
 
@@ -60,7 +60,7 @@ namespace PersonalExpenses.Pages
         }
         public void RefreshCategorias()
         {
-            PickerCategorias = new ObservableCollection<Picker_Categorias>(categoriaService.Categorias);
+            PickerCategorias = new ObservableCollection<CategoriaModel>(categoriaService.Categorias);
         }
         //[RelayCommand]
         //void Delete(string s)

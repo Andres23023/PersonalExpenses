@@ -12,6 +12,6 @@ namespace PersonalExpenses.Models
         [ObservableProperty]
         public int cantidad;
         [ObservableProperty]
-        public Picker_Categorias categoria;
+        public CategoriaModel categoria;
     }
 }

@@ -5,14 +5,14 @@ namespace PersonalExpenses.Services
 {
     public class CategoriaService
     {
-        public ObservableCollection<Picker_Categorias> Categorias { get; set; } = new ObservableCollection<Picker_Categorias>
+        public ObservableCollection<CategoriaModel> Categorias { get; set; } = new ObservableCollection<CategoriaModel>
         {
-            new Picker_Categorias ("Gastos"),
-            new Picker_Categorias ("Inversiones")
+            new CategoriaModel ("Gastos"),
+            new CategoriaModel ("Inversiones")
         };
         public void AgregarCategoria(string nombre)
         {
-            Categorias.Add(new Picker_Categorias(Categoria: nombre));
+            Categorias.Add(new CategoriaModel(Categoria: nombre));
         }
         public void EliminarCategoria(int id)
         {

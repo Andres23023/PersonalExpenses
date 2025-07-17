@@ -16,7 +16,7 @@ namespace PersonalExpenses.ViewModels
         private readonly GastoService gastoService;
         private readonly NotificacionesService _notificaciones;
         [ObservableProperty]
-        ObservableCollection<Picker_Categorias> categorias;
+        ObservableCollection<CategoriaModel> categorias;
 
         //Constructor
         public AdministrarCategoriasViewModel(CategoriaService categoriaService,GastoService gastoService,NotificacionesService notificaciones) 
@@ -38,8 +38,8 @@ namespace PersonalExpenses.ViewModels
             }
             else if (result == null)
                 return;
-
-            if (categoriaService.Categorias.Any(c => c.CategoriaNom == result))
+            //result.ToUpper();
+            if (categoriaService.Categorias.Any(c => c.CategoriaNom.ToUpper() == result.ToUpper()))
             {
                 _notificaciones.ShowSnackBar("No se puede agregar una categoria repetida", _notificaciones.Info);
                 return;
@@ -54,7 +54,7 @@ namespace PersonalExpenses.ViewModels
 
 
         [RelayCommand]
-        public async Task EliminarCategoria(Picker_Categorias c)
+        public async Task EliminarCategoria(CategoriaModel c)
         {
             if (gastoService.Gastos.Any(g => g.Categoria.IdCategoria == c.IdCategoria))
             {
@@ -75,7 +75,7 @@ namespace PersonalExpenses.ViewModels
         }
 
         [RelayCommand]
-        public async Task EditarCategoria(Picker_Categorias categoria)
+        public async Task EditarCategoria(CategoriaModel categoria)
         {
             string result = await _notificaciones.ShowPrompt("Editar Categoria", "Ingresa el nuevo nombre de la categoria", "Editar categoria", 20, categoria.CategoriaNom);
 
