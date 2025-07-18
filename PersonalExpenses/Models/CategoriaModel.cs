@@ -10,6 +10,7 @@ namespace PersonalExpenses.Pages
         public string categoriaNom;
         [ObservableProperty]
         public int idCategoria;
+        public CategoriaModel(){}
         public CategoriaModel(string Categoria)
         {
             this.CategoriaNom = Categoria;
