@@ -14,8 +14,8 @@ namespace PersonalExpenses.Services
             serializerService = new SerializerService();
             Categorias = serializerService.CargarCategorias() ?? new ObservableCollection<CategoriaModel>
             {
-            new CategoriaModel("Gastos"),
-            new CategoriaModel("Inversiones")
+                new CategoriaModel("Gastos"),
+                new CategoriaModel("Inversiones")
             };
         }
         public void AgregarCategoria(string nombre)

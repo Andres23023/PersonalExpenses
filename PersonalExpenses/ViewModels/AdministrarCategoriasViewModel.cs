@@ -1,12 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui;
-using PersonalExpenses.Models;
 using PersonalExpenses.Pages;
 using PersonalExpenses.Services;
 using System.Collections.ObjectModel;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 
 namespace PersonalExpenses.ViewModels
@@ -17,29 +13,17 @@ namespace PersonalExpenses.ViewModels
         private readonly GastoService gastoService;
         private readonly NotificacionesService _notificaciones;
 
-        private SerializerService serializerService;
-
         [ObservableProperty]
         ObservableCollection<CategoriaModel> categorias;
-        
-
-        //SerializerService serializerService = new SerializerService();
 
 
         //Constructor
-        public AdministrarCategoriasViewModel(CategoriaService categoriaService,GastoService gastoService,NotificacionesService notificaciones/*,
-            SerializerService serializerService*/) 
+        public AdministrarCategoriasViewModel(CategoriaService categoriaService,GastoService gastoService,NotificacionesService notificaciones) 
         {
             this.categoriaService = categoriaService;
             this.gastoService = gastoService;
             Categorias = categoriaService.Categorias;
             _notificaciones = notificaciones;
-
-            //this.serializerService = serializerService;
-            //Categorias = serializerService.CargarCategorias();
-            //serializerService.CargarCategorias();
-            //Categorias = new ObservableCollection<CategoriaModel>();
-            //CargarCategorias();
         }
 
         [RelayCommand]
@@ -63,9 +47,6 @@ namespace PersonalExpenses.ViewModels
             {
                 categoriaService.AgregarCategoria(result);
                 _notificaciones.ShowSnackBar($"Categoria {result} agregada correctamente", _notificaciones.Success);
-                //serializerService.GuardarCategorias();
-                //GuardarCategorias();
-
             }
 
         }
@@ -116,32 +97,5 @@ namespace PersonalExpenses.ViewModels
             }
 
         }
-
-         //void GuardarCategorias()
-         //{
-         //   //var categorias = new CategoriaService().Categorias;
-         //   var json = JsonSerializer.Serialize(Categorias);
-         //   Preferences.Set("ItemsCategorias", json);
-         //   //File.WriteAllText("categorias.json", json);
-         //}
-         //void CargarCategorias()
-         //{
-         //   if (Preferences.ContainsKey("ItemsCategorias"))
-         //   {
-         //       var json = Preferences.Get("ItemsCategorias", string.Empty);
-         //       var items = JsonSerializer.Deserialize<ObservableCollection<CategoriaModel>>(json);
-         //       //items.GetType();
-         //       //return items ?? new ObservableCollection<CategoriaModel>();
-         //       if (items != null)
-         //           Categorias = items;
-         //       else
-         //           Categorias = new ObservableCollection<CategoriaModel>();
-         //   }
-         //   else
-         //       //return new ObservableCollection<CategoriaModel>();
-         //       Categorias = new ObservableCollection<CategoriaModel>();
-
-         //}
-
     }
 }

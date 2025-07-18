@@ -28,6 +28,8 @@ namespace PersonalExpenses.Pages
         public void Refresh()
         {
             int nuevaSuma = 0;
+            if (Gastos == null)
+                return;
             foreach (var gasto in Gastos)
             {
                 nuevaSuma += gasto.Cantidad;
