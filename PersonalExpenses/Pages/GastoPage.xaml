@@ -8,7 +8,7 @@
     <VerticalStackLayout>
         
         <Grid RowDefinitions="Auto,Auto"
-          ColumnDefinitions=".42*,.35*,.23*"
+          ColumnDefinitions=".40*,.35*,.25*"
           Padding="10"
           RowSpacing="10"
           ColumnSpacing="10">
@@ -38,7 +38,7 @@
                             <Border StrokeShape="RoundRectangle 20"
                                     Margin="2">
                                 <Grid
-                                    ColumnDefinitions=".42*,.35*,.23*"
+                                    ColumnDefinitions=".40*,.35*,.25*"
                                       Padding="10">
                                     <Label Grid.Column="0"
                                            FontSize="18"
@@ -61,7 +61,7 @@
 
         </Grid>
         <Label 
-            Text="{Binding Suma}"
+            Text="{Binding Suma,StringFormat='{}{0} $'}"
             FontSize="30"
             HorizontalOptions="Center"/>
         

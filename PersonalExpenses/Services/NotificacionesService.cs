@@ -40,7 +40,7 @@ namespace PersonalExpenses.Services
         }
         public async Task<string> ShowPrompt(string titulo, string mensaje, string placeholder = "", int maxLength = 20, string initialValue = "")
         {
-            return await App.Current.MainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, default, initialValue);   
+            return await App.Current.MainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, default, initialValue);
         }
     }
 }
