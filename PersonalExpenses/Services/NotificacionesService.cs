@@ -36,11 +36,46 @@ namespace PersonalExpenses.Services
         }
         public async Task<bool> ShowAlert(string titulo, string mensaje)
         {
-            return await App.Current.MainPage.DisplayAlert(titulo, mensaje, "Ok", "Cancelar");
+            var mainPage = App.Current?.Windows.FirstOrDefault()?.Page;
+            if (mainPage == null)
+                return false;
+
+
+            return await MainThread.InvokeOnMainThreadAsync(() =>
+                mainPage.DisplayAlert(titulo, mensaje, "Ok", "Cancelar")
+            );
+
+            //if (App.Current?.MainPage == null)
+            //    return false;
+
+            //return await MainThread.InvokeOnMainThreadAsync(() =>
+            //    App.Current.MainPage.DisplayAlert(titulo, mensaje, "Ok", "Cancelar")
+            //);
+            //return await App.Current.MainPage.DisplayAlert(titulo, mensaje, "Ok", "Cancelar");
         }
         public async Task<string> ShowPrompt(string titulo, string mensaje, string placeholder = "", int maxLength = 20, string initialValue = "")
         {
-            return await App.Current.MainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, default, initialValue);
+
+            var mainPage = App.Current?.MainPage; // Simplifica y usa MainPage directamente
+            if (mainPage == null)
+            {
+                //Debug.WriteLine("MainPage no está disponible");
+                return null;
+            }
+
+            return await MainThread.InvokeOnMainThreadAsync(() =>
+                mainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, Keyboard.Default, initialValue)
+            );
+
+
+            //if (App.Current?.MainPage == null)
+            //    return null;
+
+            //return await MainThread.InvokeOnMainThreadAsync(() =>
+            //    App.Current.MainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, default, initialValue)
+            //);
+
+            //return await App.Current.MainPage.DisplayPromptAsync(titulo, mensaje, "Ok", "Cancelar", placeholder, maxLength, default, initialValue);
         }
     }
 }

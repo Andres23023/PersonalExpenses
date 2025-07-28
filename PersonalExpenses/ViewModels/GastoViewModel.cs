@@ -3,10 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using PersonalExpenses.Models;
 using PersonalExpenses.Services;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Diagnostics;
 
 
-namespace PersonalExpenses.Pages
+namespace PersonalExpenses.ViewModels
 {
     public partial class GastoViewModel: ObservableObject
     {
@@ -39,14 +39,22 @@ namespace PersonalExpenses.Pages
         [RelayCommand]
         public async Task EliminarGasto(GastoModel gasto)
         {
-            bool response = await _notificaciones.ShowAlert("Eliminar Gasto", $"Desea eliminar el gasto: {gasto.NomGasto}?");
-            if (response)
+
+            if(gasto == null)
             {
-                gastoService.EliminarGasto(gasto);
-                _notificaciones.ShowSnackBar($"Gasto {gasto.NomGasto} eliminado correctamente!", _notificaciones.Success);
-                Refresh();
+                Debug.WriteLine("Gasto es nulo en eliminar gasto.");
+                await _notificaciones.ShowSnackBar("Error: Gasto no válido", _notificaciones.Error);
+                return;
             }
-            return;
+            else
+            {
+                bool response = await _notificaciones.ShowAlert("Eliminar Gasto", $"¿Desea eliminar el gasto: {gasto.NomGasto}?");
+                if (response)
+                {
+                    gastoService.EliminarGasto(gasto);
+                    await _notificaciones.ShowSnackBar($"Gasto {gasto.NomGasto} eliminado correctamente!", _notificaciones.Success);
+                }
+            }
         }
 
     }

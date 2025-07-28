@@ -2,7 +2,7 @@
 using PersonalExpenses.Models;
 using PersonalExpenses.Services;
 
-namespace PersonalExpenses.Pages
+namespace PersonalExpenses.Services
 {
     public class GastoService
     {
@@ -20,14 +20,25 @@ namespace PersonalExpenses.Pages
 
         public void AgregarGasto(GastoModel gasto)
         {
-            Gastos.Add(gasto);
-            serializerService.GuardarGastos(Gastos);
+            if (Gastos == null)
+                Gastos = new ObservableCollection<GastoModel>();
+
+            if (gasto != null) 
+            {
+                Gastos.Add(gasto);
+                serializerService?.GuardarGastos(Gastos);
+            }
+            //Gastos.Add(gasto);
         }
 
         public void EliminarGasto(GastoModel gasto)
         {
-            Gastos.Remove(gasto);
-            serializerService.GuardarGastos(Gastos);
+            if (gasto != null && Gastos?.Contains(gasto) == true)
+            {
+                Gastos.Remove(gasto);
+                serializerService?.GuardarGastos(Gastos);
+            }
+            //Gastos.Remove(gasto);
         }
     }
 

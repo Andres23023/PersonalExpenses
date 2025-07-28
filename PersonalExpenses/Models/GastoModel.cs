@@ -1,6 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
-using PersonalExpenses.Pages;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace PersonalExpenses.Models
 {

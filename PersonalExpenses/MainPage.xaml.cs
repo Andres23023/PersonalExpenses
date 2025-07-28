@@ -1,6 +1,4 @@
-﻿using PersonalExpenses.Pages;
-using System.Collections.ObjectModel;
-using System.Security.Cryptography.X509Certificates;
+﻿using PersonalExpenses.ViewModels;
 
 namespace PersonalExpenses
 {

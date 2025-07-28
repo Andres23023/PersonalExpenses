@@ -1,7 +1,6 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace PersonalExpenses.Pages
+namespace PersonalExpenses.Models
 {
     public partial class CategoriaModel:ObservableObject
     {

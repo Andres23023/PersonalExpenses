@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PersonalExpenses.MainPage"
-             xmlns:viewmodel="clr-namespace:PersonalExpenses.Pages"
+             xmlns:viewmodel="clr-namespace:PersonalExpenses.ViewModels"
              x:DataType="viewmodel:MainViewModel"
              Title="Inicio">
 

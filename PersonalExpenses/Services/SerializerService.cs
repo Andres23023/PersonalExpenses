@@ -2,6 +2,7 @@
 using PersonalExpenses.Models;
 using PersonalExpenses.Pages;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace PersonalExpenses.Services
@@ -16,14 +17,33 @@ namespace PersonalExpenses.Services
         }
         public ObservableCollection<CategoriaModel>? CargarCategorias()
         {
-            if (Preferences.ContainsKey("ItemsCategorias"))
+            try
             {
-                var json = Preferences.Get("ItemsCategorias", string.Empty);
-                var items = JsonSerializer.Deserialize<ObservableCollection<CategoriaModel>>(json);
-                return items;
-            }
-            else
+                if (Preferences.ContainsKey("ItemsCategorias"))
+                {
+                    var json = Preferences.Get("ItemsCategorias", string.Empty);
+                    if (string.IsNullOrEmpty(json))
+                        return null;
+                    var items = JsonSerializer.Deserialize<ObservableCollection<CategoriaModel>>(json);
+                    return items;
+                }
                 return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al deserializar categorías: {ex.Message}");
+                return null;
+            }
+
+
+            /* if (Preferences.ContainsKey("ItemsCategorias"))
+             {
+                 var json = Preferences.Get("ItemsCategorias", string.Empty);
+                 var items = JsonSerializer.Deserialize<ObservableCollection<CategoriaModel>>(json);
+                 return items;
+             }
+             else
+                 return null;*/
         }
         //Gastos
         public void GuardarGastos(ObservableCollection<GastoModel> gasto)
@@ -33,14 +53,33 @@ namespace PersonalExpenses.Services
         }
         public ObservableCollection<GastoModel>? CargarGastos()
         {
-            if (Preferences.ContainsKey("ItemsGastos"))
+            try
             {
-                var json = Preferences.Get("ItemsGastos", string.Empty);
-                var items = JsonSerializer.Deserialize<ObservableCollection<GastoModel>>(json);
-                return items;
-            }
-            else
+                if (Preferences.ContainsKey("ItemsGastos"))
+                {
+                    var json = Preferences.Get("ItemsGastos", string.Empty);
+                    if (string.IsNullOrEmpty(json))
+                        return null;
+                    var items = JsonSerializer.Deserialize<ObservableCollection<GastoModel>>(json);
+                    return items;
+                }
                 return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al deserializar gastos: {ex.Message}");
+                return null;
+            }
+
+
+            /* if (Preferences.ContainsKey("ItemsGastos"))
+             {
+                 var json = Preferences.Get("ItemsGastos", string.Empty);
+                 var items = JsonSerializer.Deserialize<ObservableCollection<GastoModel>>(json);
+                 return items;
+             }
+             else
+                 return null;*/
         }
     }
 }

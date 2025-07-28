@@ -16,6 +16,7 @@ Global
 		{EA16F2CC-B729-42F3-BC9F-F0F879C708E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{EA16F2CC-B729-42F3-BC9F-F0F879C708E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA16F2CC-B729-42F3-BC9F-F0F879C708E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA16F2CC-B729-42F3-BC9F-F0F879C708E3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

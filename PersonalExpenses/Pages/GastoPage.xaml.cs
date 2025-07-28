@@ -1,6 +1,4 @@
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using PersonalExpenses.Services;
+using PersonalExpenses.ViewModels;
 namespace PersonalExpenses.Pages;
 
 public partial class GastoPage : ContentPage
@@ -14,6 +12,6 @@ public partial class GastoPage : ContentPage
 	{
 		base.OnAppearing();
 		var vm = BindingContext as GastoViewModel;
-		vm.Refresh();
+		vm?.Refresh();
 	}
 }

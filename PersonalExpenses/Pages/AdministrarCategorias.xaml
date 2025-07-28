@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PersonalExpenses.ViewModels"
+             xmlns:model="clr-namespace:PersonalExpenses.Models"
              x:Class="PersonalExpenses.Pages.AdministrarCategorias"
              Title="Categorias">
 
@@ -15,7 +16,7 @@
         <CollectionView Grid.Column="0" Grid.Row="0"
             ItemsSource="{Binding Categorias}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type x:String}">
+                <DataTemplate x:DataType="{x:Type model:CategoriaModel}">
                     <SwipeView >
 
                         <SwipeView.RightItems>
@@ -24,9 +25,6 @@
                                            BackgroundColor="Red"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"
                                            CommandParameter="{Binding .}"/>
-                                <!--="{Binding Source={RelativeSource AncestorType={x:Type vm:AdministrarCategoriasViewModel}},Path=EliminarCategoriaCommand}"-->
-                                    <!--
-                                           Clicked="DeleteCategoria"-->
 
                             </SwipeItems>
                         </SwipeView.RightItems>
