@@ -1,0 +1,1 @@
+Creación de una aplicación de gastos personales en MAUI .NET para familiarizarme con los componentes y como funciona MAUI.![WhatsApp Image 2025-08-13 at 12 30 15 AM](https://github.com/user-attachments/assets/a433be92-bb66-4848-873e-cbc134173d9a)
